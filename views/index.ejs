@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <%if(user){%>
+        <header>
+            <h1>Blog.com</h1>
+            <div class="header-links">
+                <a href="/create" class="blog-link">Create a blog</a>
+                <div class="userprofilename">
+                    <i class="fa-solid fa-user"></i>
+                    <h2>
+                        <%= name %>
+                    </h2>
+                </div>
+            </div>
+        </header>
+        <%}else{%>
+            <header>
+                <h1>Blog.com</h1>
+                <div class="header-links">
+                    <a href="/create" class="blog-link">Create a blog</a>
+                    <a href="/login" class="blog-link login">Login</a>
+                    <a href="/signup" class="blog-link">Signup</a>
+                </div>
+            </header>
+            <%}%>
+                <main class="main">
+                    <div class="hero-section">
+                        <div class="search-div">
+                            <input type="text" name="search" id="search" placeholder="Search something..">
+                            <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                        <h1>"Your Daily Dose of Insights, Ideas, and Inspiration"</h1>
+                        <svg class="editorial" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 "
+                            preserveAspectRatio="none">
+                            <defs>
+                                <path id="gentle-wave" d="M-160 44c30 0 
+                                                58-18 88-18s
+                                                58 18 88 18 
+                                                58-18 88-18 
+                                                58 18 88 18
+                                                v44h-352z" />
+                            </defs>
+                            <g class="parallax1">
+                                <use xlink:href="#gentle-wave" x="50" y="3" fill="#E3FEF7" />
+                            </g>
+                            <g class="parallax2">
+                                <use xlink:href="#gentle-wave" x="50" y="0" fill="#135D66" />
+                            </g>
+                            <g class="parallax3">
+                                <use xlink:href="#gentle-wave" x="50" y="9" fill="#77B0AA" />
+                            </g>
+                            <g class="parallax4">
+                                <use xlink:href="#gentle-wave" x="50" y="6" fill="#003C43" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="blog-area">
+                        <% data.forEach((element) => {%>
+                            <div class="blog-card">
+                                <img src=<%=`uploads/${element.path}`%> alt="">
+                                <h1><%= element.title %></h1>
+                                <p><%= `${element.content.slice(0,120)}....` %></p>
+                                <form action="/blog" method="post" >
+                                    <input type="text" id="blogTitle" name="blogTitle" value="<%=element.title%>" hidden>
+                                    <button type="submit">Read</button>
+                                </form> 
+                            </div>
+                        <%});%>
+                        </div>
+                    </div>
+
+                </main>
+</body>
+
+</html>

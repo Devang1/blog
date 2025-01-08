@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="create.css">
+</head>
+<body> 
+    <div class="gif-container">
+        <h1>Unleash Your Voice, Inspire the World</h1>
+        <p>Your voice matters. Blogging lets you share your ideas, inspire others, and make an impact. Start writing today and let the world hear your story!</p>
+        <img src="https://cdn.dribbble.com/users/2147021/screenshots/4704853/managertyping.gif" alt="blog gif" id="blog-gif">
+    </div> 
+        <div class="create-blog">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="banner">
+                    <h1>Upload Banner Image</h1>
+                    <input type="file" accept="image/*" name="blog-img" id="blog-img" hidden>
+                    <label for="blog-img" id="blog-img-lable"><img src="https://www.pngplay.com/wp-content/uploads/8/Upload-Icon-Image-Transparent-Image.png" alt="upload blog image"></label>
+                </div>
+                <input type="text" name="title" id="title" placeholder="Enter the title..">
+                <textarea type="text" name="content" id="content" placeholder="Write something amazing..."></textarea>
+                <button type="submit">PUBLISH</button>
+            </form>
+        </div>
+</body>
+</html>
