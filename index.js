@@ -5,7 +5,7 @@ import {readFile as read} from "fs/promises"
 import path from "path";
 import multer from "multer";
 const app=express();
-const port=3000;
+const port=process.env.PORT||3000;
 let userlogged=false;
 let username;
 let userpass;
@@ -184,6 +184,6 @@ app.post("/blog",async(req,res)=>{
  });
   res.render("blog.ejs",{bdata:data});
 })
-app.listen(3000,()=>{
+app.listen(port,()=>{
     console.log("server is running");
 })
