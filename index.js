@@ -1,189 +1,246 @@
-import express from "express"
+import express from "express";
 import bodyParser from "body-parser";
-import fs, { readFile } from "fs";
-import {readFile as read} from "fs/promises"
-import path from "path";
+import pg from "pg";
+import bcrypt from "bcrypt";
+import passport from "passport";
+import { Strategy } from "passport-local";
+import GoogleStrategy from "passport-google-oauth2";
+import session from "express-session";
+import env from "dotenv";
 import multer from "multer";
 const app=express();
+const testPassword = 'userpassword';
 const port=process.env.PORT||3000;
-let userlogged=false;
-let username;
-let userpass;
-const filePath=path.join("data","links.json");
-const blogPath=path.join("data","blog.json");
-app.use(bodyParser.urlencoded({ extended: true }));
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/uploads')
-  },
-  filename: function (req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`)
-  }
-})
-const CheckFunc =(req,res,next)=>{
-  if(!userlogged){
-    res.redirect("/login");
-  }
-  next();
-}
-const upload = multer({ storage: storage })
+const saltRounds = 10;
+env.config();
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+const db = new pg.Client({
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT,
+});
+db.connect();
+const upload = multer({ storage: multer.memoryStorage() });
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/",async(req,res)=>{
-  const blog= await read(blogPath, 'utf8',async(err, data) => {
-    if (err) {
-      console.error("Error reading the file:", err);
-      return res.status(500).send("Internal Server Error");
-    }
-      const jsonData = JSON.parse(data);
-      return jsonData;
-  });
- const blogCONTENT=JSON.parse(blog);
-  res.render("index.ejs",{user:userlogged,name:username,data:blogCONTENT});
+  const Bdata=await db.query("SELECT * FROM blog");
+  if(req.isAuthenticated()){
+    res.render("index.ejs",{user:true,name:req.user.name,data:Bdata.rows});
+  }else{
+  res.render("index.ejs",{user:false,name:"",data:Bdata.rows});
+  }
 })
 app.get("/login",(req,res)=>{
     res.render("login.ejs");
 })
+app.get("/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
 app.get("/signup",(req,res)=>{
     res.render("signup.ejs");
 })
-app.get("/create",CheckFunc,(req,res)=>{
-  res.render("create.ejs");
-})
-app.post("/register",(req,res)=>{
- username=req.body["name"];
- userpass=req.body["password"];
- const newuser={"name":username,"pass":userpass};
- fs.readFile(filePath, 'utf8',async(err, data) => {
-  if (err) {
-    console.error("Error reading the file:", err);
-    return res.status(500).send("Internal Server Error");
-  }
-
+app.get("/image/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const jsonData = JSON.parse(data);
+    const result = await db.query("SELECT image FROM blog WHERE id = $1", [id]);
 
-    if (!Array.isArray(jsonData)) {
-      return res.status(400).send("JSON file does not contain an array.");
+    if (result.rows.length > 0) {
+      const imageBuffer = result.rows[0].image; 
+      res.setHeader("Content-Type", "image/"); 
+      res.send(imageBuffer); 
+    } else {
+      res.status(404).send("Image not found");
     }
-    let flag=false;
-
-    // Add new data to the array
-    for (const key in jsonData) {
-      if(jsonData[key].name===newuser.name){
-        flag=true;
-      }
-    }
-    if(flag===false){
-      jsonData.push(newuser);
-      username=newuser.name;
-      res.redirect("/");
-    }else{
-      res.send(` <script>alert("username already exists");window.location.href = '/signup'; // Redirect to another page after alert </script>`);
-    }
-    
-    // Write the updated data back to the file
-    fs.writeFile(filePath, JSON.stringify(jsonData), (writeErr) => {
-      if (writeErr) {
-        console.error("Error writing to the file:", writeErr);
-      }
-    });
-  } catch (parseErr) {
-    console.error("Error parsing JSON data:", parseErr);
+  } catch (err) {
+    console.error("Error fetching image:", err);
+    res.status(500).send("Error fetching image");
   }
 });
-
-userlogged=true;
+app.get("/create",(req,res)=>{
+  if(req.isAuthenticated()){
+    res.render("create.ejs");
+  }
+  else{
+    res.redirect("/");
+  }
 })
-
-
-app.post("/log",(req,res)=>{
-    username =req.body["name"];
-    userpass=req.body["password"];
-    const newuser={"name":username,"pass":userpass};
-    fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) {
-        console.error("Error reading the file:", err);
-      }
-  
-      try {
-        const jsonData = JSON.parse(data);
-        let flag=false;
-        // Check if jsonData is an array before calling forEach
-        if (Array.isArray(jsonData)) {
-          // return jsonData;
-          jsonData.forEach(element => {
-            if(newuser.name===element.name &&newuser.pass===element.pass){
-              flag=true;
-            }
-          });
-        } else {
-          console.error("JSON data is not an array!");
-        }
-        if(flag===true){
-          username=newuser.name;
-          userlogged=true;
-          res.redirect("/");
-        }
-        else{
-          res.send(` <script>alert("username or password is wrong");window.location.href = '/login'; // Redirect to another page after alert </script>`);
-        }
-      } catch (parseErr) {
-        console.error("Error parsing JSON data:", parseErr);
-      }
-    });
+app.get("/myBlog",async(req,res)=>{
+  if(req.isAuthenticated()){
+    const userData=await db.query("select * from blog where author=$1",[req.user.name]);
+    res.render("my-blogs.ejs",{name:req.user.name,data:userData.rows});
+  }
+  else{
+    res.redirect("/login");
+  }
 })
-app.post("/upload",upload.single("blog-img"),(req,res)=>{
-  const blogdata={
-    title: req.body.title,
-    content: req.body.content,
-    path: req.file.filename
-  };
-  fs.readFile(blogPath, 'utf8',async(err, data) => {
-    if (err) {
-      console.error("Error reading the file:", err);
-      return res.status(500).send("Internal Server Error");
-    }
+app.post("/delete",async(req,res)=>{
+  await db.query("DELETE FROM blog WHERE title = $1", [req.body.blogTitle]);
+  res.redirect("/myBlog")
+})
+app.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+
+app.get(
+  "/auth/google/blog",
+  passport.authenticate("google", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+  })
+);
+app.post("/register",async(req,res)=>{
+  const email = req.body.email;
+  const password = req.body.password;
+  const name= req.body.name;
     try {
-      const jsonData = JSON.parse(data);
-      // Add new data to the array
-        jsonData.push(blogdata);
-      // Write the updated data back to the file
-      fs.writeFile(blogPath, JSON.stringify(jsonData), (writeErr) => {
-        if (writeErr) {
-          console.error("Error writing to the file:", writeErr);
-        }
-      });
-    } catch (parseErr) {
-      console.error("Error parsing JSON data:", parseErr);
+      const checkResult = await db.query("SELECT * FROM user_info WHERE email = $1", [
+        email,
+      ]);
+      if (checkResult.rows.length > 0) {
+        res.redirect("/login");
+      } else {
+        bcrypt.hash(password, saltRounds, async (err, hash) => {
+          if (err) {
+            console.error("Error hashing password:", err);
+          } else {
+            const result = await db.query(
+              "INSERT INTO user_info (name,email,user_password) VALUES ($1, $2,$3) RETURNING *",
+              [name,email, hash]
+            );
+            const user = result.rows[0];
+            req.login(user, (err) => {
+              console.log("success");
+            });
+            res.redirect("/");
+          }
+        });
+      }
+    } catch (err) {
+      console.log(err);
     }
-  });
-  res.redirect("/");
+})
+
+
+app.post("/log",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+  })
+);
+app.post("/upload",upload.single("blog-img"),async(req,res)=>{
+  if(req.isAuthenticated()){
+  try {
+    await db.query('INSERT INTO blog (title, content,author,image) VALUES ($1, $2,$3,$4)', [req.body.title,req.body.content,req.user.name,req.file.buffer]);
+    res.redirect("/");
+} catch (err) {
+    console.error('Error uploading image:', err);
+    res.status(500)
+}}
 })
 app.post("/blog",async(req,res)=>{
   const title=req.body.blogTitle
   const data={
     tit:title,
     img:'',
-    para:''
+    para:'',
+    author:''
   }
-  const blog= await read(blogPath, 'utf8',async(err, data) => {
-    if (err) {
-      console.error("Error reading the file:", err);
-      return res.status(500).send("Internal Server Error");
-    }
-      const jsonData = JSON.parse(data);
-      return jsonData;
-  });
- const blogCONTENT=JSON.parse(blog);
+  const blogCONT=await db.query("SELECT * FROM blog");
+  const blogCONTENT=blogCONT.rows;
  blogCONTENT.forEach((element)=> {
   if(element.title===title){
     data.tit=element.title;
-    data.img=`uploads/${element.path}`,
+    data.img=element.id,
     data.para=element.content
+    data.author=element.author;
   }
  });
   res.render("blog.ejs",{bdata:data});
 })
+
+passport.use(
+  "local",
+  new Strategy({ usernameField: "email" },async function verify(email, password, cb){
+    try {
+      const result = await db.query("SELECT * FROM user_info WHERE email = $1 ", [email,]);
+      if (result.rows.length > 0) {
+        const user = result.rows[0];
+        const storedHashedPassword = user.user_password;
+        bcrypt.compare(password, storedHashedPassword, (err, valid) => {
+          if (err) {
+            console.error("Error comparing passwords:", err);
+            return cb(err);
+          } else {
+            if (valid) {
+              return cb(null, user);
+            } else {
+              return cb(null, false);
+            }
+          }
+        });
+      } else {
+        return cb("User not found");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  })
+);
+passport.use(
+  "google",
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/auth/google/blog",
+      userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
+    },
+    async (accessToken, refreshToken, profile, cb) => {
+      try {
+        const result = await db.query("SELECT * FROM user_info WHERE email = $1", [
+          profile.email,
+        ]);
+        if (result.rows.length === 0) {
+          const newUser = await db.query(
+            "INSERT INTO user_info (name,email, user_password) VALUES ($1, $2)",
+            [profile.name,profile.email, "google"]
+          );
+          return cb(null, newUser.rows[0]);
+        } else {
+          return cb(null, result.rows[0]);
+        }
+      } catch (err) {
+        return cb(err);
+      }
+    }
+  )
+);
+passport.serializeUser((user, cb) => {
+  cb(null, user);
+});
+
+passport.deserializeUser((user, cb) => {
+  cb(null, user);
+});
 app.listen(port,()=>{
     console.log("server is running");
 })

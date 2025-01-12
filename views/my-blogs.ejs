@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blogs</title>
+    <link rel="stylesheet" href="my-blog.css">
+</head>
+<body>
+    <header>
+        <h1>Blog.com</h1>
+        <a href="/">HOME</a>
+    </header>
+    <% if(data.length==0){ %>
+        <div class="no-data">
+            <h1>Not Written any blog yet </h1>
+            <h2>Create a blog now:</h2>
+            <a href="/create">Create a blog</a>
+        </div>
+    <% }else{%>
+    <h1 class="h1"><%= name.toUpperCase() %>'s Blogs</h1>
+    <div class="blog-area">
+        <% data.forEach((blog) => {%>
+            <div class="blog-card">
+                <img src=<%=`/image/${blog.id}`%> alt="blog img">
+                <h1><%= blog.title %></h1>
+                <h3><%=blog.author.toUpperCase()%></h3>
+                <p><%= `${blog.content.slice(0,120)}....` %></p>
+                <form action="/blog" method="post" >
+                    <input type="text" id="blogTitle" name="blogTitle" value="<%=blog.title%>" hidden>
+                    <button type="submit">Read</button>
+                </form>
+                <form action="/delete" method="post">
+                    <input type="text" id="blogTitle" name="blogTitle" value="<%=blog.title%>" hidden>
+                    <button type="submit" id="delete">Delete</button>
+                </form>
+            </div>
+        <%});%>
+        </div>
+        <% } %>
+    </div>
+    
+</body>
+</html>

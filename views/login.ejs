@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>login page</title>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
@@ -11,11 +11,15 @@
     <div class="login-form">
         <h1>Login</h1>
         <form action="/log" method="post">
-            <input type="text" placeholder="Enter user name" name="name">
+            <input type="email" placeholder="Enter email" name="email">
             <input type="password" placeholder="Enter password" name="password">
             <button type="submit">Login</button>
-            <a href="/signup">Don't have a account?</a>
         </form>
+                <a class="google-log" href="/auth/google" role="button">
+                  <i class="fa-brands fa-google"></i>
+                  log In with Google
+                </a>
+                <a href="/signup">Don't have a account?</a>
     </div>
 </body>
 </html>

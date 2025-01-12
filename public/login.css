@@ -38,6 +38,7 @@ body{
     align-items: center;
     flex-direction: column;
     padding: 2vw;
+    padding-bottom: 0;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 form{
@@ -89,4 +90,19 @@ a{
     color:#111;
     font-size: 1.3vw;
     font-weight: 500;
+    margin-top: 0.5px;
+    margin-bottom: 1vw;
+    border-radius: 10px;
+}
+.google-log{
+    text-decoration: none;
+    color:#f1eeee;
+    background-color: #2e2d2d;
+    font-size: 1.3vw;
+    font-weight: 500;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20vw;
 }

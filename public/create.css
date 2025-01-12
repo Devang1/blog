@@ -87,7 +87,7 @@ form{
 }
 #title{
     width:80%;
-    height: 10%;
+    height: 8%;
     margin: 0.5vw 5vw;
     border: none;
     border-radius: 10px;
@@ -104,7 +104,7 @@ form{
 }
 #content{
     width:80%;
-    height: 40%;
+    height: 35%;
     margin: 0.5vw 5vw;
     border: none;
     border-radius: 10px;
@@ -134,3 +134,20 @@ button{
         cursor: pointer;
         margin: 1vw 20vw;
     }
+#author{
+    width:80%;
+    height: 8%;
+    margin: 0.5vw 5vw;
+    border: none;
+    border-radius: 10px;
+    background-color:#0b5660;
+    color: #BAFFFD;
+    font-size: 1.5vw;
+    padding: 10px;
+}
+#author::placeholder{
+    font-size: 1.5vw;
+    color: #77B0AA;
+    font-weight: 600;
+    font-family: "Quicksand", serif;
+}

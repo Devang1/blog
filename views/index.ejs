@@ -20,8 +20,9 @@
                 <div class="userprofilename">
                     <i class="fa-solid fa-user"></i>
                     <h2>
-                        <%= name %>
+                        <%= name.toUpperCase() %>
                     </h2>
+                    <a href="/logout" class="blog-link login">Logout</a>
                 </div>
             </div>
         </header>
@@ -37,9 +38,12 @@
             <%}%>
                 <main class="main">
                     <div class="hero-section">
-                        <div class="search-div">
+                        <!-- <div class="search-div">
                             <input type="text" name="search" id="search" placeholder="Search something..">
                             <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div> -->
+                        <div class="my-blogs">
+                            <a href="/myBlog" id="my-blog-a"> MY BLOGS</a>
                         </div>
                         <h1>"Your Daily Dose of Insights, Ideas, and Inspiration"</h1>
                         <svg class="editorial" xmlns="http://www.w3.org/2000/svg"
@@ -68,13 +72,14 @@
                         </svg>
                     </div>
                     <div class="blog-area">
-                        <% data.forEach((element) => {%>
+                        <% data.forEach((blog) => {%>
                             <div class="blog-card">
-                                <img src=<%=`uploads/${element.path}`%> alt="">
-                                <h1><%= element.title %></h1>
-                                <p><%= `${element.content.slice(0,120)}....` %></p>
+                                <img src=<%=`/image/${blog.id}`%> alt="blog img">
+                                <h1><%= blog.title %></h1>
+                                <h3><%=blog.author%></h3>
+                                <p><%= `${blog.content.slice(0,120)}....` %></p>
                                 <form action="/blog" method="post" >
-                                    <input type="text" id="blogTitle" name="blogTitle" value="<%=element.title%>" hidden>
+                                    <input type="text" id="blogTitle" name="blogTitle" value="<%=blog.title%>" hidden>
                                     <button type="submit">Read</button>
                                 </form> 
                             </div>
