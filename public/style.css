@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Acme&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Vinyl&family=SUSE:wght@100..800&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Acme&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Vinyl&family=SUSE:wght@100..800&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -86,7 +86,7 @@ gap: 2vw;
   position: relative;
   h1{
     /* color: #092635; */
-    color: #fff;
+    /* color: #fff;
     font-size: 1.8vw;
   }
   img{
@@ -258,4 +258,352 @@ gap: 2vw;
     100% {
       transform: translate(85px, 0%);
     }
+  } */ 
+  @import url('https://fonts.googleapis.com/css2?family=Acme&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Vinyl&family=SUSE:wght@100..800&display=swap');
+
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
   }
+  
+  html, body {
+      height: 100%;
+      width: 100%;
+  }
+  
+  h1 {
+      color: #77B0AA;
+  }
+  
+  h2 {
+      color: #fff;
+  }
+  
+  body {
+      background-color: #E3FEF7;
+      font-family: "Quicksand", serif;
+      background-image: url("https://romebusinessschool.com/wp-content/uploads/2023/10/adwefdgv.webp");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+  }
+  
+  ::-webkit-scrollbar {
+      width: 0.7vw;
+  }
+  
+  ::-webkit-scrollbar-track {
+      background-color: #7AB2B2;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+      background: #243642;
+      border-radius: 50px;
+  }
+  
+  header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: "SUSE", serif;
+      padding: 1vw;
+      background-color: #11111172;
+  }
+  
+  .header-links {
+      display: flex;
+      align-items: center;
+      gap: 2vw;
+  }
+  
+  .blog-link {
+      color: #77B0AA;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2vw;
+  }
+  
+  .login {
+      color: #092635;
+      background-color: #77B0AA;
+      border-radius: 15px;
+      padding: 1vh 1.3vw;
+      font-size: 1vw;
+  }
+  
+  .main {
+      background-image: url("https://romebusinessschool.com/wp-content/uploads/2023/10/adwefdgv.webp");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      height: 90.2%;
+      width: 100%;
+  }
+  
+  .blog-area {
+      width: 100%;
+      min-height: 100%;
+      background-color: #E3FEF7;
+      padding: 2vw;
+      display: flex;
+      gap: 2vw;
+      flex-wrap: wrap;
+  }
+  
+  .blog-card {
+      width: 20vw;
+      height: 65vh;
+      border-radius: 20px;
+      padding: 1vw;
+      background-color: #77B0AA;
+      position: relative;
+  }
+  
+  .blog-card h1 {
+      color: #fff;
+      font-size: 1.8vw;
+  }
+  
+  .blog-card img {
+      width: 100%;
+      height: 50%;
+      border-radius: 5px;
+  }
+  
+  .blog-card p {
+      margin-bottom: 0.2vw;
+      font-size: 1vw;
+  }
+  
+  .blog-card button {
+      color: white;
+      background-color: black;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 1.2vw;
+      padding: 6px 10px;
+      margin-left: 13vw;
+      position: absolute;
+      outline: none;
+      border: none;
+      bottom: 1vw;
+      right: 1vw;
+  }
+  
+  .hero-section {
+      background-color: #11111172;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      position: relative;
+      padding-bottom: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+  }
+  
+  .hero-section h1 {
+      font-family: "Acme", serif;
+      font-size: 4vw;
+      color: #E3FEF7;
+  }
+  
+  .search-div {
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30vw;
+      height: 6vh;
+      gap: 1vw;
+      border: #77B0AA 2px solid;
+      border-radius: 50px;
+  }
+  
+  .search-div input {
+      height: 90%;
+      width: 80%;
+      background-color: transparent;
+      border: none;
+      font-size: 3vh;
+      color: #77B0AA;
+  }
+  
+  .search-div input:focus {
+      background-color: transparent;
+      border: none;
+      outline: none;
+  }
+  
+  .search-div input::placeholder {
+      color: #77B0AA;
+      font-weight: 500;
+  }
+  
+  #search-btn {
+      background-color: transparent;
+      font-size: 2vw;
+      border: none;
+  }
+  
+  #search-btn i {
+      color: #77B0AA;
+      background-color: transparent;
+      cursor: pointer;
+  }
+  
+  #my-blog-a {
+      text-decoration: none;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #7AB2B2;
+      border: #7AB2B2 3px solid;
+      border-radius: 20px;
+      padding: 0.3vw;
+      margin: 1vw;
+      display: inline-block;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  }
+  
+  .userprofilename {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5vw;
+  }
+  
+  .userprofilename i {
+      color: #77B0AA;
+      font-size: 2.5vh;
+  }
+  
+  .editorial {
+      display: block;
+      width: 100%;
+      height: 60px;
+      max-height: 60px;
+      margin: 0;
+      z-index: 5;
+      position: absolute;
+      left: 0px;
+      bottom: 0;
+      float: left;
+  }
+  
+  /* Parallax Animations */
+  .parallax1 > use {
+      animation: move-forever1 10s linear infinite;
+  }
+  
+  .parallax2 > use {
+      animation: move-forever2 8s linear infinite;
+  }
+  
+  .parallax3 > use {
+      animation: move-forever3 6s linear infinite;
+  }
+  
+  .parallax4 > use {
+      animation: move-forever4 4s linear infinite;
+  }
+  
+  @keyframes move-forever1 {
+      0% {
+          transform: translate(85px, 0%);
+      }
+      100% {
+          transform: translate(-90px, 0%);
+      }
+  }
+  
+  @keyframes move-forever2 {
+      0% {
+          transform: translate(-90px, 0%);
+      }
+      100% {
+          transform: translate(85px, 0%);
+      }
+  }
+  
+  @keyframes move-forever3 {
+      0% {
+          transform: translate(85px, 0%);
+      }
+      100% {
+          transform: translate(-90px, 0%);
+      }
+  }
+  
+  @keyframes move-forever4 {
+      0% {
+          transform: translate(-90px, 0%);
+      }
+      100% {
+          transform: translate(85px, 0%);
+      }
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 1200px) {
+      .blog-card {
+          width: 25vw;
+      }
+  }
+  
+  @media (max-width: 768px) {
+      body {
+          font-size: 1.2rem;
+      }
+  
+      .header-links {
+          flex-direction: column;
+      }
+  
+      .blog-card {
+          width: 40vw;
+          height: auto;
+      }
+  
+      .hero-section h1 {
+          font-size: 5vw;
+      }
+  
+      .search-div {
+          width: 50vw;
+      }
+  }
+  
+  @media (max-width: 600px) {
+      body {
+          font-size: 1rem;
+      }
+  
+      header {
+          flex-direction: column;
+      }
+  
+      .blog-card {
+          width: 90%;
+          margin: 1vw auto;
+          height: auto;
+      }
+  
+      .search-div {
+          width: 80vw;
+          font-size: 2.5vh;
+      }
+  
+      .hero-section h1 {
+          font-size: 6vw;
+      }
+  
+      .blog-link {
+          font-size: 4vw;
+      }
+  
+      .login {
+          font-size: 1.5rem;
+      }
+  }
+  
