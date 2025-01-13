@@ -75,7 +75,11 @@
                         <% data.forEach((blog) => {%>
                             <div class="blog-card">
                                 <img src=<%=`/image/${blog.id}`%> alt="blog img">
+                                <%if(blog.title.length()<30){%>
                                 <h1><%= blog.title %></h1>
+                                <%}else{%>
+                                    <h1><%= `${blog.title.slice(0,25)}....` %></h1>
+                                <%}%>
                                 <h3><%=blog.author%></h3>
                                 <p><%= `${blog.content.slice(0,120)}....` %></p>
                                 <form action="/blog" method="post" >
