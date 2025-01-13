@@ -211,7 +211,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://https://blog-com-lqh2.onrender.com/auth/google/blog",
+      callbackURL: "https://blog-com-lqh2.onrender.com/auth/google/blog",
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     async (accessToken, refreshToken, profile, cb) => {
