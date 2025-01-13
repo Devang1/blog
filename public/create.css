@@ -152,7 +152,7 @@ button{
     font-family: "Quicksand", serif;
 } 
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     body{
         display: flex;
         align-items: center;

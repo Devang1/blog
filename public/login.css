@@ -233,66 +233,7 @@ a {
 }
 
 /* Media Queries for Responsiveness */
-@media (max-width: 1200px) {
-    .login-form {
-        width: 35%;
-    }
-    input::placeholder {
-        color: #fff;
-        font-weight: 200;
-    }
-    
-    input {
-        font-size: 4vh;
-    }
-
-    button {
-        font-size: 8vw;
-    }
-
-    .google-log {
-        width: 25vw;
-        font-size: 1.2vw;
-    }
-    img{
-        display: none;
-    }
-
-    a {
-        font-size: 1.2vw;
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        gap: 5vw;
-    }
-
-    .login-form {
-        width: 40%;
-        padding: 5vw;
-    }
-
-    input {
-        width: 90%;
-        font-size: 3vh;
-    }
-
-    button {
-        font-size: 5vw;
-    }
-
-    .google-log {
-        width: 30vw;
-        font-size: 4vw;
-    }
-
-    a {
-        font-size: 3vw;
-    }
-}
-
-@media (max-width: 600px) {
+@media (max-width: 850px) {
     body {
         flex-direction: column;
         gap: 2vw;

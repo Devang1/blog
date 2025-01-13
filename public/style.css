@@ -265,7 +265,7 @@ row-gap: 2vw;
       transform: translate(85px, 0%);
     }
   } 
-@media (max-width: 768px) { /* For mobile devices */
+@media (max-width: 850px) { /* For mobile devices */
   body{
     background-size: cover;
   } 

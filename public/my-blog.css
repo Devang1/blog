@@ -147,46 +147,8 @@ header{
     margin-left: 40vw;
     color: #003C43;
     font-weight: 900;
-  } 
-  @media (max-width: 768px) {
-      header {
-          /* flex-direction: column; */
-          align-items: center;
-          height: auto;
-      }
-  
-      header a {
-          font-size: 3vw;
-      }
-  
-      .blog-card {
-          width: 45vw;
-          height: auto;
-      }
-  
-      .blog-area {
-          flex-direction: column;
-          align-items: center;
-      }
-  
-      .no-data h1 {
-          font-size: 5vw;
-      }
-  
-      .no-data h2 {
-          font-size: 3vw;
-      }
-  
-      .no-data a {
-          font-size: 2.5vw;
-      }
-  
-      .h1 {
-          margin-left: 0;
-      }
   }
-  
-  @media (max-width: 600px) {
+  @media (max-width: 850px) {
       header {
           padding: 4vw;
       }

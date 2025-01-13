@@ -150,75 +150,7 @@ main {
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-    header {
-        padding: 1.5vw;
-    }
-
-    header h1 {
-        font-size: 2.5vw;
-    }
-
-    header a {
-        font-size: 1.2vw;
-    }
-
-    img {
-        width: 35%;
-        margin: 1vw 25vw;
-    }
-
-    #h1 {
-        font-size: 5vw;
-        margin-left: 5vw;
-    }
-
-    #h2 {
-        font-size: 2.5vw;
-        margin-left: 5vw;
-    }
-
-    p {
-        font-size: 1.2vw;
-        margin: 2vw 4vw;
-    }
-}
-
-@media (max-width: 768px) {
-    header {
-        padding: 2vw;
-    }
-
-    header h1 {
-        font-size: 3vw;
-    }
-
-    header a {
-        font-size: 2vw;
-    }
-
-    img {
-        width: 50%;
-        margin: 1vw 20vw;
-    }
-
-    #h1 {
-        font-size: 6vw;
-        margin-left: 4vw;
-    }
-
-    #h2 {
-        font-size: 3vw;
-        margin-left: 4vw;
-    }
-
-    p {
-        font-size: 1.3vw;
-        margin: 2vw 3vw;
-    }
-}
-
-@media (max-width: 600px) {
+@media (max-width: 850px) {
     header {
         padding: 3vw;
     }
