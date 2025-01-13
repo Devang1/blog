@@ -157,7 +157,7 @@ header{
           font-size: 4vw;
       }
       .blog-card {
-          width: 90%;
+          width: 80%;
           height: 60%;
           margin-bottom: 4vw;
           padding: 4vw;
@@ -177,14 +177,14 @@ header{
           button{
             font-size: 3vw;
             padding: 6px 10px;
-            margin-top: 2vw;
+            margin-top: 5vw;
             position: absolute;
             margin: 1vw 4vw;
           }
           #delete {
             font-size: 3vw;
             padding: 6px 10px;
-            margin-top: 2vw;
+            margin-top: 5vw;
             position: absolute;
             display: inline-block;
             right: 20vw;
@@ -192,7 +192,7 @@ header{
       }
       .blog-area {
           gap: 2vw;
-          padding: 0 2vw;
+          padding: 4vw 6vw;
       }
       .h1 {
           font-size: 8vw;
