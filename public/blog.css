@@ -194,7 +194,7 @@ main {
     }
 
     header a {
-        font-size: 1.5vw;
+        font-size: 2vw;
     }
 
     img {
@@ -219,13 +219,7 @@ main {
 }
 
 @media (max-width: 600px) {
-    body {
-        padding: 5vw;
-    }
-
     header {
-        flex-direction: column;
-        align-items: center;
         padding: 3vw;
     }
 
@@ -234,7 +228,7 @@ main {
     }
 
     header a {
-        font-size: 2vw;
+        font-size: 3vw;
     }
 
     img {

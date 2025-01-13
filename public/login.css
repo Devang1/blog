@@ -237,18 +237,25 @@ a {
     .login-form {
         width: 35%;
     }
-
+    input::placeholder {
+        color: #fff;
+        font-weight: 200;
+    }
+    
     input {
-        font-size: 2.5vh;
+        font-size: 4vh;
     }
 
     button {
-        font-size: 1.3vw;
+        font-size: 8vw;
     }
 
     .google-log {
         width: 25vw;
         font-size: 1.2vw;
+    }
+    img{
+        display: none;
     }
 
     a {
@@ -263,25 +270,25 @@ a {
 
     .login-form {
         width: 40%;
-        padding: 4vw;
+        padding: 5vw;
     }
 
     input {
         width: 90%;
-        font-size: 3.5vh;
+        font-size: 3vh;
     }
 
     button {
-        font-size: 2.2vw;
+        font-size: 5vw;
     }
 
     .google-log {
         width: 30vw;
-        font-size: 1.5vw;
+        font-size: 4vw;
     }
 
     a {
-        font-size: 1.5vw;
+        font-size: 3vw;
     }
 }
 
@@ -299,20 +306,21 @@ a {
 
     input {
         width: 90%;
-        font-size: 4vh;
+        font-size: 3vh;
+        padding: 5vw;
     }
 
     button {
-        font-size: 3vw;
+        font-size: 5vw;
         width: 80%;
     }
 
     .google-log {
         width: 70%;
-        font-size: 1.8vw;
+        font-size: 4vw;
     }
 
     a {
-        font-size: 1.8vw;
+        font-size: 3vw;
     }
 }

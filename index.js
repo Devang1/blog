@@ -23,11 +23,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 const db = new pg.Client({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
+  user:process.env.PG_USER,
+  host:process.env.PG_HOST,
+  database:process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
+  port: process.env.PG_PORT
 });
 db.connect();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -77,7 +77,7 @@ app.get("/create",(req,res)=>{
     res.render("create.ejs");
   }
   else{
-    res.redirect("/");
+    res.redirect("/login");
   }
 })
 app.get("/myBlog",async(req,res)=>{
@@ -211,7 +211,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/blog",
+      callbackURL: "http://https://blog-com-lqh2.onrender.com/auth/google/blog",
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     async (accessToken, refreshToken, profile, cb) => {
